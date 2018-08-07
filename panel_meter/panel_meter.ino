@@ -267,16 +267,22 @@ void Output()
       lcd.clear();
       Pressure_range = Pressure_range - add;
     }
-    if(Pressure_range > 9999)
-    {
-      Pressure_range = 0;
-    }
-    if(Pressure_range < 0)
-    {
-      Pressure_range = 9999;
-    }
     lcd.setCursor(0, 0);
     lcd.print(Pressure_range);
+    lcd.print(" ");
+    switch (unit_types)
+      {
+      case 0:
+      lcd.print("psi    ");
+        break;
+      case 1:
+      lcd.print("kPa    ");
+        break;
+      case 2:
+      lcd.print("Pa    ");
+        break;
+      }
+    lcd.print("    ");
     lcd.setCursor(0,1);
     lcd.print("+");
     lcd.print(add);
@@ -381,6 +387,7 @@ void Pressure()
      lcd.setCursor(0,1);
      lcd.print(Data);
      lcd.print(" ");
+     delay(100); //To prevent a flickering screen
   }
   lcd.clear();
 }
