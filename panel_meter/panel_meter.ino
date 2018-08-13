@@ -1,7 +1,7 @@
 //Author: Thomas Savage
-//Date: 17 July 2018
+//Date: 13 August 2018
 //Subject: RDE research; Pressure Transducer Display
-//Version 1.6 (Adding program to read pressure off of analog signal)
+//Version 1.8 (Adding cursor to Input Setup)
 //This program reads an analog input and allows the user to display a result in the form of a pressure
 #include <LiquidCrystal.h>
 
@@ -155,10 +155,15 @@ if(unit_types != previous_unit_types)
 
 void Input_Setup()
 {
+  int count = 0; //Deals with blinking of cursor
   menu = 0;
   enter = 0;
   to_add = 0.01;
   CURSOR = 15;
+  lcd.setCursor(5,0);
+  lcd.print(lower_voltage);
+  lcd.print(" - ");
+  lcd.print(upper_voltage);
   while(enter == 0)
   {
     enter = debounce(button4, previous_button4_state);
@@ -222,15 +227,24 @@ void Input_Setup()
         upper_voltage = 0;
       }
     }
-
-    lcd.setCursor(5,0);
-    lcd.print(lower_voltage);
-    lcd.print(" - ");
-    lcd.print(upper_voltage);
-    lcd.setCursor(0,1);
-    lcd.print("                ");
-    lcd.setCursor(CURSOR - 1, 1);
-    lcd.print(" ^ ");
+    count ++;
+    if(up == 1 || down == 1)
+    {
+      lcd.setCursor(5,0);
+      lcd.print(lower_voltage);
+      lcd.print(" - ");
+      lcd.print(upper_voltage);
+    }
+    lcd.setCursor(CURSOR, 0);
+    if(count < 500)
+    {
+      lcd.blink();
+    }
+    if(count == 1000)
+    {
+      lcd.noBlink();
+      count = 0;
+    }
   }
   lcd.clear();
 }
@@ -296,7 +310,7 @@ void Show(int &choice)
   switch(choice)
     {
     case 0:
-    lcd.print("Version 1.7");
+    lcd.print("Version 1.8");
     while(menu != 1) //For some reason the condition menu = 0 doesn't work. It seems that menu can never truly be 0
       {
         menu = debounce(button1, previous_button1_state);
