@@ -10,4 +10,5 @@ Protoboard (2x?): https://www.spikenzielabs.com/Catalog/index.php?main_page=prod
 Terminal Bocks: https://www.spikenzielabs.com/Catalog/index.php?main_page=product_info&cPath=20_113&products_id=1234
 
 
-Case: ?
+Case: https://abra-electronics.com/enclosures-boxes/plastic-box-generic/1591lflbk-enclosure-plastic-abs-black-with-card-guides-85-mm-x-56-mm-x-39-mm.html
+
